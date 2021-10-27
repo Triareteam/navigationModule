@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 
 public class NavigationModel {
-    private(set) var initialViewControllerType: NavigationModuleViewController.Type
     
-    public init(initialViewControllerType: NavigationModuleViewController.Type) {
+    private(set) var initialViewControllerType: NavigationModuleViewControllerType.Type
+    
+    public init(initialViewControllerType: NavigationModuleViewControllerType.Type) {
         self.initialViewControllerType = initialViewControllerType
     }
     
     func buildComponent(in navigationModule: NavigationModule, with object: Any?) -> UINavigationController {
-        return UINavigationController.init(rootViewController: initialViewControllerType.init(navigationModule: navigationModule, object: object))
+        return UINavigationController(rootViewController: initialViewControllerType.init(navigationModule: navigationModule, object: object))
     }
+    
 }

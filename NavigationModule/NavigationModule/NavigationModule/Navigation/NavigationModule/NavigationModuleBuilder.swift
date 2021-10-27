@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 
 class NavigationModuleBuilder {
+    
     static func build(navigationModels: [NavigationModel], navigationRouterDelegate: NavigationRouterDelegate) -> NavigationModule {
         
         if navigationModels.count > 1 {
-            return TabBarNavigationModule.init(navigationRouterModuleDelegate: navigationRouterDelegate, navigationModels: navigationModels)
+            return TabBarNavigationModule(navigationRouterModuleDelegate: navigationRouterDelegate, navigationModels: navigationModels)
         } else {
-            return NavigationModule.init(navigationRouterModuleDelegate: navigationRouterDelegate, navigationModels: navigationModels)
+            return NavigationModule(navigationRouterModuleDelegate: navigationRouterDelegate, navigationModels: navigationModels)
         }
     }
+    
 }

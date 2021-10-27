@@ -20,7 +20,7 @@ public class NavigationRouter {
     }
     
     public func startNavigationModuleFrom(_ navigationModel: NavigationModel) {
-        let navigationModuleAbstract = NavigationModule.init(navigationRouterModuleDelegate: self, navigationModels: [navigationModel])
+        let navigationModuleAbstract = NavigationModule(navigationRouterModuleDelegate: self, navigationModels: [navigationModel])
         window.rootViewController = navigationModuleAbstract.startFlow()
         
         currentModule = navigationModuleAbstract

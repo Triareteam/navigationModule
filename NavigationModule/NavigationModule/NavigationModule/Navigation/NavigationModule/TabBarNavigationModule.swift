@@ -9,11 +9,12 @@ import Foundation
 import UIKit
 
 class TabBarNavigationModule: NavigationModule {
+    
     override func builder(for navigationModels: [NavigationModel], with object: Any?) -> UINavigationController {
-        let tabBarController = NavigationSetController.init()
+        let tabBarController = NavigationSetController()
         
         navigationModels.forEach { (navigationModel) in
-            tabBarController.navigationModules.append(NavigationModuleBuilder.build(navigationModels: [navigationModel], navigationRouterDelegate: self.navigationRouterModuleDelegate))
+            tabBarController.navigationModules.append(NavigationModuleBuilder.build(navigationModels: [navigationModel], navigationRouterDelegate: navigationRouterModuleDelegate))
         }
         
         tabBarController.generateViewControllers()
@@ -21,4 +22,5 @@ class TabBarNavigationModule: NavigationModule {
         navigationController.setViewControllers([tabBarController], animated: false)
         return navigationController
     }
+    
 }

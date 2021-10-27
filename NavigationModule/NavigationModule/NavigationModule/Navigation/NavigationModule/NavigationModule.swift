@@ -13,7 +13,7 @@ open class NavigationModule {
     
     private(set) var navigationRouterModuleDelegate: NavigationRouterDelegate!
     
-    private(set) var navigationController: UINavigationController = UINavigationController()
+    private(set) var navigationController = UINavigationController()
     
     private(set) var navigationModels: [NavigationModel]?
     
@@ -35,13 +35,12 @@ open class NavigationModule {
     }
     
     public func endFlow(with nextNavigationModel: [NavigationModel]) {
+        navigationController.viewControllers.removeAll()
         navigationRouterModuleDelegate.startNextNavigationModule(with: nextNavigationModel)
     }
     
-    public func pushViewController<T : NavigationModuleViewController>(_ viewController: T.Type, object: Any?) {
-        
+    public func pushViewController<T : NavigationModuleViewControllerType>(_ viewController: T.Type, object: Any?) {
         let viewController = viewController.init(navigationModule: self, object: object)
-        viewController.object = object
         navigationController.pushViewController(viewController, animated: true)
     }
     
@@ -51,14 +50,14 @@ open class NavigationModule {
     
     public func present(by navigationModels: [NavigationModel]?, with object: Any?, and presentationStyle: UIModalPresentationStyle) {
         guard let navigationModels = navigationModels else { return }
-        let navigationModule = NavigationModule.init(navigationRouterModuleDelegate: self.navigationRouterModuleDelegate, navigationModels: navigationModels)
+        let navigationModule = NavigationModule(navigationRouterModuleDelegate: navigationRouterModuleDelegate, navigationModels: navigationModels)
         guard let presentedNavigationController = navigationModule.startFlow(object) else { return }
         presentedNavigationController.modalPresentationStyle = presentationStyle
         navigationController.present(presentedNavigationController, animated: true, completion: nil)
     }
     
     public func dismiss() {
-        guard let presentingViewController = navigationController.presentingViewController else {return}
+        guard let presentingViewController = navigationController.presentingViewController else { return }
         presentingViewController.dismiss(animated: true, completion: nil)
     }
 }

@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 public class NavigationSetModel: NavigationModel {
+    
     var title: String?
     var imageName: String?
-    
+
     public init(title: String?, imageName: String?, initialViewControllerType: NavigationModuleViewController.Type) {
         self.title = title
         self.imageName = imageName
@@ -20,8 +21,9 @@ public class NavigationSetModel: NavigationModel {
     }
     
     override func buildComponent(in navigationModule: NavigationModule, with object: Any?) -> UINavigationController {
-        let tabBarItem = UITabBarItem.init(title: title, image: UIImage(named: imageName ?? ""), tag: 0)
-        let navigationController = UINavigationController.init(rootViewController: initialViewControllerType.init(navigationModule: navigationModule))
+        let image = UIImage(named: imageName ?? "", in: Bundle(for: initialViewControllerType.self), with: nil)
+        let tabBarItem = UITabBarItem(title: title, image: image, tag: 0)
+        let navigationController = UINavigationController(rootViewController: initialViewControllerType.init(navigationModule: navigationModule, object: object))
         navigationController.tabBarItem = tabBarItem
         return navigationController
     }

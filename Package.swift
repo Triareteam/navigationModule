@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "NavigationModule",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS(.v13)],
     products: [
         .library(name: "NavigationModule",targets: ["NavigationModule"]),
     ],

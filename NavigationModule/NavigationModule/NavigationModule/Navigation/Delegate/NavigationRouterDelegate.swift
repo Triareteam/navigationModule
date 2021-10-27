@@ -9,6 +9,5 @@
 import Foundation
 
 public protocol NavigationRouterDelegate {
-    
     func startNextNavigationModule(with navigationModel: [NavigationModel])
 }
