@@ -13,7 +13,7 @@ open class NavigationModule {
     
     private(set) var navigationRouterModuleDelegate: NavigationRouterDelegate!
     
-    private(set) var navigationController: UINavigationController = UINavigationController()
+    private(set) weak var navigationController: UINavigationController!
     
     private(set) var navigationModels: [NavigationModel]?
     
